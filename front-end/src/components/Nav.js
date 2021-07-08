@@ -7,49 +7,60 @@ const Nav = () => {
   const { pathname } = useLocation();
 
   return (
-    <Container>
-      <Logo>
-        <h1>Crypto Dashboard</h1>
-      </Logo>
-      <Box>
-        <Links>
-          <ul>
-            <li>
-              <Link to="/" class={pathname === "/" ? "current" : ""}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/coins" class={pathname === "/coins" ? "current" : ""}>
-                Coins
-              </Link>
-            </li>
-            <li>
-              <Link to="/gas" class={pathname === "/gas" ? "current" : ""}>
-                Gas
-              </Link>
-            </li>
-            <li>
-              <Link to="/farm" class={pathname === "/farm" ? "current" : ""}>
-                Farm
-              </Link>
-            </li>
-          </ul>
-        </Links>
-        <Search>
-          <form>
-            <TextInput
-              type="text"
-              name="token"
-              placeholder="Search for Tokens"
-            />
-            <Submit type="submit" value="Search" />
-          </form>
-        </Search>
-      </Box>
-    </Container>
+    <LineContainer>
+      <Container>
+        <Logo>
+          <h1>Crypto Dashboard</h1>
+        </Logo>
+        <Box>
+          <Links>
+            <ul>
+              <li>
+                <Link to="/" class={pathname === "/" ? "current" : ""}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/coins"
+                  class={pathname === "/coins" ? "current" : ""}
+                >
+                  Coins
+                </Link>
+              </li>
+              <li>
+                <Link to="/gas" class={pathname === "/gas" ? "current" : ""}>
+                  Gas
+                </Link>
+              </li>
+              <li>
+                <Link to="/farm" class={pathname === "/farm" ? "current" : ""}>
+                  Farm
+                </Link>
+              </li>
+            </ul>
+          </Links>
+          <Search>
+            <form>
+              <TextInput
+                type="text"
+                name="token"
+                placeholder="Search for Tokens"
+              />
+              <Submit type="submit" value="Search" />
+            </form>
+          </Search>
+        </Box>
+      </Container>
+    </LineContainer>
   );
 };
+const LineContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100px;
+  z-index: 99;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -57,7 +68,7 @@ const Container = styled.div`
   background: #202225;
   color: white;
   width: 100%;
-  height: 100px;
+  height: 99px;
   align-items: center;
   z-index: 100;
 `;
@@ -73,6 +84,8 @@ const Logo = styled.div`
   display: flex;
   position: absolute;
   left: 5%;
+  font-family: "Bebas Neue";
+  font-size: 1.5rem;
 `;
 
 const Links = styled.div`
@@ -125,6 +138,7 @@ const Submit = styled.input`
     color: #202225;
     background: white;
     border: 1px solid #202225;
+    cursor: pointer;
   }
 `;
 

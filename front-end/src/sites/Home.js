@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
+import Gastracker from "../components/GasTracker";
+
 const Home = () => {
   return (
     <Container>
       <h1>Home</h1>
+      <Gastracker />
     </Container>
   );
 };
