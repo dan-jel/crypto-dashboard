@@ -24,13 +24,25 @@ const GasTracker = () => {
         <Column>
           <p className="one">slow</p>
           <p className="two">10 gwei</p>
-          <p className="three">(> 10 min)</p>
+          <p className="three">({">"} 10 min)</p>
         </Column>
         <Line />
       </Table>
     </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 450px;
+  background: #36393f;
+  position: absolute;
+  top: 125px;
+  left: 10%;
+  border-radius: 10px;
+`;
 
 const Line = styled.div`
   display: flex;
@@ -70,16 +82,7 @@ const Table = styled.div`
   padding-bottom: 30px;
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  width: 450px;
-  background: #36393f;
-  position: absolute;
-  top: 125px;
-  left: 10%;
-  border-radius: 10px;
+const Headline = styled.div`
   h3 {
     margin: 30px 0 0 20px;
     font-size: 1.1rem;
@@ -92,7 +95,5 @@ const Container = styled.div`
     font-size: 1rem;
   }
 `;
-
-const Headline = styled.div``;
 
 export default GasTracker;

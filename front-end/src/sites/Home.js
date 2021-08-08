@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 import Gastracker from "../components/GasTracker";
+import Calculator from "../components/Calculator";
 
 const Home = () => {
   return (
     <Container>
       <h1>Home</h1>
       <Gastracker />
+      <Calculator />
     </Container>
   );
 };

@@ -60,11 +60,14 @@ const LineContainer = styled.div`
   width: 100%;
   height: 100px;
   z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
 `;
 
 const Container = styled.div`
   display: flex;
-  position: absolute;
   background: #202225;
   color: white;
   width: 100%;
