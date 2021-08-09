@@ -1,5 +1,8 @@
-No Mongo DB Files:
+# No Mongo DB Files:
 database/
+
+# pip virtual env
+api/env
 
 # Logs
 logs
