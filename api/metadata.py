@@ -5,12 +5,15 @@ import pprint
 
 from pymongo import MongoClient
 
-url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+client=MongoClient("mongodb://localhost:27017")
+db=client.data
+meta=db["meta"]
+
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info'
 parameters = {
-  'start':'1',
-  'limit':'10',
-  'convert':'USD'
+"id":"1,2"
 }
+
 
 
 headers = {
@@ -25,5 +28,6 @@ try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
   pprint.pprint(data)
+  
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
