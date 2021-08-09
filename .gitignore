@@ -2,7 +2,7 @@
 database/
 
 # pip virtual env
-api/env/
+env/
 
 # Logs
 logs
