@@ -5,26 +5,24 @@ import pprint
 
 from pymongo import MongoClient
 
-client=MongoClient("mongodb://localhost:27017")
-db=client.data
-meta=db["meta"]
-beta=db["beta"]
+client = MongoClient("mongodb://localhost:27017")
+db = client.data
+meta = db["meta"]
+beta = db["beta"]
 
-todo_res=beta.find({})
-todo=""
+todo_res = beta.find({})
+todo = ""
 for r in todo_res:
-    todo=todo+str(r["id"])+","
-todo=todo[:len(todo)-1]
+    todo = todo + str(r["id"]) + ","
+todo = todo[:len(todo) - 1]
 print(todo)
-if len(todo)>=1:
+if len(todo) >= 1:
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info'
-    parameters = {"id":todo}
-
-
+    parameters = {"id": todo}
 
     headers = {
-      'Accepts': 'application/json',
-      'X-CMC_PRO_API_KEY': 'eeba834a-9b71-4ade-8cf3-b933b34e81f7',
+        'Accepts': 'application/json',
+        'X-CMC_PRO_API_KEY': 'eeba834a-9b71-4ade-8cf3-b933b34e81f7',
     }
 
     session = Session()
@@ -37,26 +35,26 @@ if len(todo)>=1:
             data = raw_data["data"]
             pprint.pprint(data)
             for d in data:
-                real_data=data[d]
+                real_data = data[d]
                 id = real_data["id"]
                 slug = real_data["slug"]
                 symbol = real_data["symbol"]
                 logo = real_data["logo"]
                 source = real_data["urls"]["source_code"]
                 website = real_data["urls"]["website"]
-                query = {"id":id}
-                search_res=meta.find(query)
-                res=0
+                query = {"id": id}
+                search_res = meta.find(query)
+                res = 0
                 for x in search_res:
-                    res=x
+                    res = x
                 if res == 0:
                     meta.insert_one({
-                        "id":id,
-                        "slug":slug,
-                        "symbol":symbol,
-                        "logo":logo,
-                        "source":source,
-                        "website":website,
+                        "id": id,
+                        "slug": slug,
+                        "symbol": symbol,
+                        "logo": logo,
+                        "source": source,
+                        "website": website,
                     })
             beta.delete_many({})
         except:

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 
 const Nav = () => {
   const { pathname } = useLocation();
+  const [tokenInput, setTokenInput] = useState();
 
   return (
     <LineContainer>
@@ -41,20 +42,28 @@ const Nav = () => {
             </ul>
           </Links>
           <Search>
-            <form>
+            <div>
               <TextInput
                 type="text"
                 name="token"
                 placeholder="Search for Tokens"
+                onChange={(e) => setTokenInput(e.target.value)}
               />
-              <Submit type="submit" value="Search" />
-            </form>
+              <button
+                onClick={() => {
+                  window.location = `../coin/${tokenInput}`;
+                }}
+              >
+                search
+              </button>
+            </div>
           </Search>
         </Box>
       </Container>
     </LineContainer>
   );
 };
+
 const LineContainer = styled.div`
   display: flex;
   width: 100%;
@@ -113,11 +122,30 @@ const Links = styled.div`
 const Search = styled.div`
   display: flex;
   height: 40px;
-  form {
+  div {
+    height: 100%;
+    display: flex;
     input {
+      top: 0;
       font-size: 0.9rem;
       height: 100%;
       border-radius: 5px;
+    }
+    button {
+      width: 75px;
+      height: 40px;
+      background: #202225;
+      color: white;
+      border: 1px solid white;
+      border-radius: 5px;
+      margin-left: 7px;
+      font-size: 0.9rem;
+      :hover {
+        color: #202225;
+        background: white;
+        border: 1px solid #202225;
+        cursor: pointer;
+      }
     }
   }
 `;
@@ -128,20 +156,6 @@ const TextInput = styled.input`
   padding: 0 0 0 10px;
   :focus {
     outline: none;
-  }
-`;
-
-const Submit = styled.input`
-  width: 75px;
-  background: #202225;
-  color: white;
-  border: 1px solid white;
-  margin-left: 7px;
-  :hover {
-    color: #202225;
-    background: white;
-    border: 1px solid #202225;
-    cursor: pointer;
   }
 `;
 

@@ -8,6 +8,8 @@ import Farm from "./sites/Farm";
 
 import Nav from "./components/Nav";
 
+import CoinDetail from "./components/CoinDetail";
+
 function App() {
   return (
     <div className="App">
@@ -17,6 +19,7 @@ function App() {
         <Route exact path="/farm" component={Farm} />
         <Route exact path="/gas" component={Gas} />
         <Route exact path="/" component={Home} />
+        <Route exact path="/coin/:id" component={CoinDetail} />
       </Switch>
     </div>
   );
