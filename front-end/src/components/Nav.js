@@ -51,7 +51,7 @@ const Nav = () => {
               />
               <button
                 onClick={() => {
-                  window.location = `../coin/${tokenInput}`;
+                  window.location = `../coin/${tokenInput.toUpperCase()}`;
                 }}
               >
                 search
