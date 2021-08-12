@@ -15,28 +15,26 @@ class CoinDetail extends React.Component {
   componentDidMount() {
     const inputSymbol = window.location.href.split("/").pop();
 
-    axios
-      .post("http://192.168.8.115:5000/coininfo", { symbol: inputSymbol })
-      .then(
-        (res) => {
-          const response = JSON.parse(res["data"]);
-          console.log(response);
-          this.setState({
-            error: null,
-            isLoaded: true,
-            items: response,
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
+    axios.post("http://localhost:5000/coininfo", { symbol: inputSymbol }).then(
+      (res) => {
+        const response = JSON.parse(res["data"]);
+        console.log(response);
+        this.setState({
+          error: null,
+          isLoaded: true,
+          items: response,
+        });
+      },
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error,
+        });
+      }
+    );
   }
 
   render() {
@@ -48,6 +46,7 @@ class CoinDetail extends React.Component {
     } else {
       return (
         <Container>
+          <img src={items["logo"]} alt="LOGO" />
           <ul>
             <li>{items["id"]}</li>
             <li>{items["slug"]}</li>
@@ -73,6 +72,11 @@ const Container = styled.div`
   justify-content: center;
   color: black;
   font-size: 1.5rem;
+  img {
+    height: 64px;
+    width: 64px;
+    display: inline-block;
+  }
 `;
 
 export default CoinDetail;

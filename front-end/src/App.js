@@ -8,7 +8,7 @@ import Farm from "./sites/Farm";
 
 import Nav from "./components/Nav";
 
-import CoinDetail from "./components/CoinDetail";
+import CoinDetail from "./sites/CoinDetail";
 
 function App() {
   return (
