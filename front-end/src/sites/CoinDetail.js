@@ -15,7 +15,7 @@ class CoinDetail extends React.Component {
   componentDidMount() {
     const inputSymbol = window.location.href.split("/").pop();
 
-    axios.post("http://localhost:5000/coininfo", { symbol: inputSymbol }).then(
+    axios.post("http://h2911972.stratoserver.net:5000/coininfo", { symbol: inputSymbol }).then(
       (res) => {
         const response = JSON.parse(res["data"]);
         console.log(response);
