@@ -8,7 +8,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 
-client = MongoClient("mongodb://localhost:27017")
+client = MongoClient("mongodb://0.0.0.0:27018")
 db = client.data
 meta = db["meta"]
 
