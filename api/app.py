@@ -10,18 +10,18 @@ api = Api(app)
 
 client = MongoClient("mongodb://0.0.0.0:27018")
 db = client.data
-meta = db["meta"]
+meta = db["meta_data"]
 
 
 @cross_origin()
 
 
 def CoinExists(symbol):
-    count = meta.count_documents({"symbol":symbol})
-    if count == 0:
-        return ""
-    else:
+    count = meta.count_documents({"symbol":symbol.upper()})
+    if count == 1:
         return "1"
+    else:
+        return ""
 
 
 class CoinInfo(Resource):
@@ -33,8 +33,6 @@ class CoinInfo(Resource):
             r = meta.find({"symbol":symbol})
             for result in r:
                 del result["_id"]
-                result= str(result).replace("'",'"')
-                result= result.replace("None",'"None"')
                 response = jsonify(result)
                 response.status_code = 200
                 return response

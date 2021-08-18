@@ -15,10 +15,11 @@ class CoinDetail extends React.Component {
   componentDidMount() {
     const inputSymbol = window.location.href.split("/").pop();
 
-    axios.post("http://h2911972.stratoserver.net:5000/coininfo", { symbol: inputSymbol }).then(
+    axios.post("http://localhost:5000/coininfo", { symbol: inputSymbol }).then(
       (res) => {
-        const response = JSON.parse(res["data"]);
-        console.log(response);
+        console.log(typeof res["data"]);
+        console.log(res["data"]);
+        const response = res["data"];
         this.setState({
           error: null,
           isLoaded: true,
@@ -46,17 +47,8 @@ class CoinDetail extends React.Component {
     } else {
       return (
         <Container>
-          <img src={items["logo"]} alt="LOGO" />
-          <ul>
-            <li>{items["id"]}</li>
-            <li>{items["slug"]}</li>
-            <li>{items["symbol"]}</li>
-            <li>{items["cmc_rank"]}</li>
-            <li>{items["EUR"]["price"]} €</li>
-            <li>
-              <a href={items["website"][0]}>website</a>
-            </li>
-          </ul>
+          <p>id: {items["symbol"]}</p>
+          <p>name: {items["name"]}</p>
         </Container>
       );
     }
