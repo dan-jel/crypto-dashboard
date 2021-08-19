@@ -5,6 +5,9 @@ conn_string.txt*
 # pip virtual env
 venv/
 
+# ignore Coin-Icons
+coin_images/
+
 # Logs
 logs
 *.log

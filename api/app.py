@@ -1,4 +1,4 @@
-from flask import Flask, json, request, jsonify
+from flask import Flask, json, request, jsonify, send_from_directory, abort
 from pymongo import MongoClient
 from flask_restful import Api, Resource
 from flask_cors import CORS, cross_origin
@@ -8,13 +8,10 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 
-connection_string=[]
 with open("conn_string.txt","r") as file:
-    connection_string.append(file.readline())
-    
+    connection_string=file.readline()
 
-
-client = MongoClient(connection_string[0])
+client = MongoClient(connection_string)
 db = client.data
 meta = db["meta_data"]
 
@@ -48,7 +45,21 @@ class CoinInfo(Resource):
             return response
 
 
+
+
+app.config["CLIENT_IMAGES"] = "../coin_images/"
+
+class CoinImage(Resource):
+    def get(self,image_name):
+        try:
+            return send_from_directory(
+                directory=app.config["CLIENT_IMAGES"],path=image_name, as_attachment=False
+            )
+        except FileNotFoundError:
+            abort(404)
+
 api.add_resource(CoinInfo, "/coininfo")
+api.add_resource(CoinImage, "/get-image/<image_name>")
 
 if __name__== "__main__":
     app.run(host="0.0.0.0")
