@@ -1,5 +1,6 @@
 # No Mongo DB Files:
 database/
+conn_string.txt*
 
 # pip virtual env
 venv/

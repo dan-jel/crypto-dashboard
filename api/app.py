@@ -8,7 +8,13 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 
-client = MongoClient("mongodb://0.0.0.0:27018")
+connection_string=[]
+with open("conn_string.txt","r") as file:
+    connection_string.append(file.readline())
+    
+
+
+client = MongoClient(connection_string[0])
 db = client.data
 meta = db["meta_data"]
 
