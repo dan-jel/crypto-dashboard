@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 
+import LineGraph from "../components/LineGraph";
+import data from "./linedata";
+
 class CoinDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +20,6 @@ class CoinDetail extends React.Component {
 
     axios.post("http://localhost:5000/coininfo", { symbol: inputSymbol }).then(
       (res) => {
-        console.log(typeof res["data"]);
-        console.log(res["data"]);
         const response = res["data"];
         this.setState({
           error: null,
@@ -47,28 +48,92 @@ class CoinDetail extends React.Component {
     } else {
       return (
         <Container>
-          <p>id: {items["symbol"]}</p>
-          <p>name: {items["name"]}</p>
+          <Border>
+            <Filler />
+            <Header>
+              <div className="image">
+                <img
+                  src={`http://localhost:5000/get-image/${items.symbol}_large.png`}
+                />
+              </div>
+              <Banner></Banner>
+            </Header>
+            <Line />
+            <Body>
+              <div className="left">
+                <Graph>
+                  <LineGraph data={data} />
+                </Graph>
+              </div>
+              <div className="right"></div>
+            </Body>
+          </Border>
         </Container>
       );
     }
   }
 }
 
-const Container = styled.div`
-  display: flex;
-  position: absolute;
+const Graph = styled.div`
   width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  font-size: 1.5rem;
-  img {
-    height: 64px;
-    width: 64px;
-    display: inline-block;
+  height: 500px;
+`;
+
+const Line = styled.div`
+  height: 1px;
+  width: 100%;
+  background: white;
+  margin: 5px 0 5px 0;
+`;
+
+const Body = styled.div`
+  display: flex;
+  height: auto;
+  width: 100%;
+  .left {
+    width: 66.5%;
   }
+  .right {
+    width: 33.5%;
+  }
+`;
+
+const Banner = styled.div`
+  height: 100%;
+  width: 100%;
+  background: red;
+`;
+
+const Header = styled.div`
+  height: 250px;
+
+  display: flex;
+  img {
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+  }
+`;
+
+const Filler = styled.div`
+  height: 150px;
+`;
+
+const Border = styled.div`
+  position: relative;
+  width: 80%;
+  left: 10%;
+  height: auto;
+`;
+
+const Container = styled.div`
+  background: #2d3237;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  position: relative;
+  color: white;
 `;
 
 export default CoinDetail;
