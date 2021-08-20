@@ -10,15 +10,16 @@ meta = db["meta_data"]
 
 cursor=meta.find({})
 for c in cursor:
-    symbol=c["symbol"]
-    ct = ColorThief("../coin_images/"+ symbol +"_small.png")
+    id=c["id"]
+    print(id)
+    ct = ColorThief("../coin_images/"+ id +"_small.png")
     color = ct.get_color(quality=1)
     hex_color='#%02x%02x%02x' % color
     meta.update({
-        "symbol":symbol
+        "id":id
     },{
         "$set":{
             "color":hex_color
         }
     })
-    print(symbol, color,hex_color)
+    print(color,hex_color)

@@ -42,9 +42,9 @@ class CoinDetail extends React.Component {
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
-      return <Container>Error: {error.message}</Container>;
+      return <ErrorContainer>Error: {error.message}</ErrorContainer>;
     } else if (!isLoaded) {
-      return <Container>Loading...</Container>;
+      return <ErrorContainer>Loading...</ErrorContainer>;
     } else {
       return (
         <Container>
@@ -53,10 +53,14 @@ class CoinDetail extends React.Component {
             <Header>
               <div className="image">
                 <img
-                  src={`http://localhost:5000/get-image/${items.symbol}_large.png`}
+                  src={`http://localhost:5000/get-image/${items.id}_large.png`}
                 />
               </div>
-              <Banner></Banner>
+              <Banner>
+                <h2>{items.name}</h2>
+                <h2>{items.symbol}</h2>
+                <h2>{items.rank}</h2>
+              </Banner>
             </Header>
             <Line />
             <Body>
@@ -73,6 +77,18 @@ class CoinDetail extends React.Component {
     }
   }
 }
+const ErrorContainer = styled.div`
+  background: #2d3237;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+`;
 
 const Graph = styled.div`
   width: 100%;
@@ -101,7 +117,6 @@ const Body = styled.div`
 const Banner = styled.div`
   height: 100%;
   width: 100%;
-  background: red;
 `;
 
 const Header = styled.div`

@@ -20,15 +20,21 @@ with open("top500.json","r") as file:
             time.sleep(10)
 
         coindata = cg.get_coin_by_id(data[i])
-        print(i,coindata["name"])
+        print(coindata["market_cap_rank"],coindata["id"])
         
         coindict={
+            "id":coindata["id"],
             "symbol": coindata["symbol"].upper(),
             "name":coindata["name"],
+            "color":"#4A9968",
             "description": coindata["description"]["en"],
             "homepage": coindata["links"]["homepage"],
             "github": coindata["links"]["repos_url"]["github"],
             "blockchain_site": coindata["links"]["blockchain_site"],
+            "twitter": coindata["links"]["twitter_screen_name"],
+            "facebook": coindata["links"]["facebook_username"],
+            "telegram": coindata["links"]["telegram_channel_identifier"],
+            "reddit": coindata["links"]["subreddit_url"],
             "image": {
                 "small_url":coindata["image"]["small"],
                 "large_url":coindata["image"]["large"],
@@ -55,6 +61,10 @@ with open("top500.json","r") as file:
             "total_volume":{
                 "euro":coindata["market_data"]["total_volume"]["eur"],
                 "dollar":coindata["market_data"]["total_volume"]["usd"],
+            },
+            "fully_diluted_valuation":{
+                "euro":"",
+                "dollar":"",
             },
             "total_supply":coindata["market_data"]["total_supply"],
             "circulating_supply":coindata["market_data"]["circulating_supply"],

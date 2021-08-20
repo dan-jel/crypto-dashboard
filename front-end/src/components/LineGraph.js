@@ -46,7 +46,7 @@ const LineGraph = ({ data /* see data tab */ }) => (
       stacked: true,
       reverse: false,
     }}
-    yFormat=" >-.2f"
+    yFormat=" >-.0f"
     axisTop={null}
     axisRight={null}
     axisBottom={{
@@ -54,7 +54,7 @@ const LineGraph = ({ data /* see data tab */ }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "transportation",
+      legend: "date",
       legendOffset: 36,
       legendPosition: "middle",
     }}
@@ -63,7 +63,7 @@ const LineGraph = ({ data /* see data tab */ }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
+      legend: "price",
       legendOffset: -40,
       legendPosition: "middle",
     }}

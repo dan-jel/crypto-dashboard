@@ -21,10 +21,10 @@ meta = db["meta_data"]
 
 def CoinExists(symbol):
     count = meta.count_documents({"symbol":symbol.upper()})
-    if count == 1:
-        return "1"
-    else:
+    if count == 0:
         return ""
+    else:
+        return "1"
 
 
 class CoinInfo(Resource):
