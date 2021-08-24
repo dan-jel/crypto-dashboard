@@ -77,16 +77,28 @@ with open("top500.json","r") as file:
                 "dollar":coindata["market_data"]["low_24h"]["usd"],
             },
             "change_percentage":{
-                "day":coindata["market_data"]["price_change_percentage_24h"],
-                "week":coindata["market_data"]["price_change_percentage_7d"],
-                "month":coindata["market_data"]["price_change_percentage_30d"],
-                "year":coindata["market_data"]["price_change_percentage_1y"],
+                "1h":"",
+                "1d":"",
+                "1w":"",
+                "1m":"",
+                "6m":"",
+                "1y":"",
             },
             "price_change_24h":{
                 "euro":coindata["market_data"]["price_change_24h_in_currency"]["eur"],
                 "dollar":coindata["market_data"]["price_change_24h_in_currency"]["usd"],
-                "coin":coindata["market_data"]["price_change_24h"],
-                "percent":coindata["market_data"]["price_change_percentage_24h"]
+            },
+            "price_hourly":{
+                "euro":[{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0}],
+                "dollar":[{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0}]
+            },
+            "price_daily":{
+                "euro":[{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0}],
+                "dollar":[{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0},{"x":"N/A","y":0}]
+                },
+            "price_historic":{
+                "euro":[],
+                "dollar":[]
             }
         }
         meta.insert_one(coindict)

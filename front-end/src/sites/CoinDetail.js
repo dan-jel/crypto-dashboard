@@ -54,6 +54,7 @@ class CoinDetail extends React.Component {
               <div className="image">
                 <img
                   src={`http://localhost:5000/get-image/${items.id}_large.png`}
+                  alt={items.name}
                 />
               </div>
               <Banner>
