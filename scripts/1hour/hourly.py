@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import json
 from pycoingecko import CoinGeckoAPI
 from datetime import datetime
+import pytz
 
 cg = CoinGeckoAPI()
 
@@ -15,14 +16,12 @@ meta = db["meta_data"]
 
 sched = BlockingScheduler()
 
-
-
-@sched.scheduled_job('interval', minutes=10)
+@sched.scheduled_job('interval', hours=1)
 def interval_job():
-    current_time = datetime.now()
-    now = current_time.strftime("%H:%M")
+    current_time = datetime.now(pytz.timezone("Europe/Berlin"))
+    now = current_time.strftime("%H")
 
-    print("job started running at ", now)
+    print("job started running at:", current_time)
 
     with open("top500.json","r") as file:
         coinids = json.load(file)
@@ -54,11 +53,6 @@ def interval_job():
                 "id":id
             },{
                 "$set":{
-                    "price":{
-                        "euro":euro["current_price"],
-                        "dollar":dollar["current_price"],
-                        "date":euro["last_updated"]
-                        },
                     "market_cap":{
                         "euro":euro["market_cap"],
                         "dollar":dollar["market_cap"],
@@ -113,7 +107,7 @@ def interval_job():
                 }
             })
 
-    print("job finished running")
+    print("job finished running at:", current_time)
 
 
 sched.start()
