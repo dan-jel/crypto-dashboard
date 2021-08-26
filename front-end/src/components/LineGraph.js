@@ -37,7 +37,7 @@ const LineGraph = ({ data /* see data tab */ }) => (
         },
       },
     }}
-    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+    margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
     xScale={{ type: "point" }}
     yScale={{
       type: "linear",

@@ -3,7 +3,9 @@ import styled from "styled-components";
 import axios from "axios";
 
 import LineGraph from "../components/LineGraph";
-import data from "./linedata";
+import linedata from "./linedata";
+import BarChart from "../components/BarChart";
+import bardata from "./bardata";
 
 class CoinDetail extends React.Component {
   constructor(props) {
@@ -67,10 +69,14 @@ class CoinDetail extends React.Component {
             <Body>
               <div className="left">
                 <Graph>
-                  <LineGraph data={data} />
+                  <LineGraph data={linedata} />
                 </Graph>
               </div>
-              <div className="right"></div>
+              <div className="right">
+                <BarContainer>
+                  <BarChart data={bardata} />
+                </BarContainer>
+              </div>
             </Body>
           </Border>
         </Container>
@@ -78,6 +84,12 @@ class CoinDetail extends React.Component {
     }
   }
 }
+
+const BarContainer = styled.div`
+  height: 300px;
+  width: 100%;
+`;
+
 const ErrorContainer = styled.div`
   background: #2d3237;
   display: flex;
