@@ -37,11 +37,11 @@ const LineGraph = ({ data /* see data tab */ }) => (
         },
       },
     }}
-    margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+    margin={{ top: 50, right: 25, bottom: 60, left: 60 }}
     xScale={{ type: "point" }}
     yScale={{
       type: "linear",
-      min: "auto",
+      min: 0,
       max: "auto",
       stacked: true,
       reverse: false,
@@ -74,9 +74,9 @@ const LineGraph = ({ data /* see data tab */ }) => (
     pointBorderColor={{ from: "serieColor" }}
     pointLabelYOffset={-12}
     enableArea={true}
+    areaBaselineValue={0}
     enableCrosshair={false}
     useMesh={true}
-    legends={[]}
   />
 );
 

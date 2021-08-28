@@ -4,8 +4,10 @@ import axios from "axios";
 
 import LineGraph from "../components/LineGraph";
 import linedata from "./linedata";
-import BarChart from "../components/BarChart";
-import bardata from "./bardata";
+import PriceChangeBarChart from "../components/PriceChangeBarChart";
+import ATBarChart from "../components/ATBarChart";
+import CoinMetadataContainer from "../components/CoinMetadataContainer";
+import PriceChangeContainer from "../components/PriceChangeContainer";
 
 class CoinDetail extends React.Component {
   constructor(props) {
@@ -48,34 +50,77 @@ class CoinDetail extends React.Component {
     } else if (!isLoaded) {
       return <ErrorContainer>Loading...</ErrorContainer>;
     } else {
+      console.log(items);
+
+      const changeBarData = [
+        {
+          y: "24h high",
+          x: items.high_24h.euro,
+          color: "#60B455",
+        },
+        {
+          y: "current",
+          x: items.price.euro,
+          color: "#F6C43C",
+        },
+        {
+          y: "24h low",
+          x: items.low_24h.euro,
+          color: "#FE7648",
+        },
+      ];
+
+      const atBarData = [
+        {
+          y: "ATH",
+          x: items.ath.euro,
+          color: "#60B455",
+          date: items.ath.date,
+        },
+        {
+          y: "current",
+          x: items.price.euro,
+          color: "#F6C43C",
+          date: items.last_updated,
+        },
+        {
+          y: "ATL",
+          x: items.atl.euro,
+          color: "#FE7648",
+          date: items.ath.date,
+        },
+      ];
+
       return (
         <Container>
           <Border>
             <Filler />
-            <Header>
-              <div className="image">
-                <img
-                  src={`http://localhost:5000/get-image/${items.id}_large.png`}
-                  alt={items.name}
-                />
-              </div>
-              <Banner>
-                <h2>{items.name}</h2>
-                <h2>{items.symbol}</h2>
-                <h2>{items.rank}</h2>
-              </Banner>
-            </Header>
-            <Line />
             <Body>
               <div className="left">
+                <Description>
+                  <h2>Description</h2>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: items.description }}
+                  ></div>
+                </Description>
+                <Spacing />
                 <Graph>
                   <LineGraph data={linedata} />
                 </Graph>
               </div>
+              <div className="middle"></div>
               <div className="right">
-                <BarContainer>
-                  <BarChart data={bardata} />
-                </BarContainer>
+                <BarChartContainer>
+                  <PriceChangeBarChart changeBarData={changeBarData} />
+                </BarChartContainer>
+                <Spacing />
+                <CoinMetadataContainer items={items} />
+                <Spacing />
+                <PriceChangeContainer items={items} />
+                <Spacing />
+                <BarChartContainer>
+                  <ATBarChart atBarData={atBarData} />
+                </BarChartContainer>
               </div>
             </Body>
           </Border>
@@ -85,9 +130,25 @@ class CoinDetail extends React.Component {
   }
 }
 
-const BarContainer = styled.div`
+const Spacing = styled.div`
+  height: 20px;
+  width: 100%;
+`;
+
+const Description = styled.div`
+  background: #202225;
+  border-radius: 10px;
+  padding: 20px;
+  h2 {
+    margin: 0 0 10px 0;
+  }
+`;
+
+const BarChartContainer = styled.div`
   height: 300px;
   width: 100%;
+  background: #202225;
+  border-radius: 10px;
 `;
 
 const ErrorContainer = styled.div`
@@ -104,42 +165,25 @@ const ErrorContainer = styled.div`
 `;
 
 const Graph = styled.div`
+  background: #202225;
+  border-radius: 10px;
   width: 100%;
   height: 500px;
-`;
-
-const Line = styled.div`
-  height: 1px;
-  width: 100%;
-  background: white;
-  margin: 5px 0 5px 0;
 `;
 
 const Body = styled.div`
   display: flex;
   height: auto;
   width: 100%;
+  align-items: space-between;
   .left {
-    width: 66.5%;
+    width: 65%;
+  }
+  .middle {
+    width: 2%;
   }
   .right {
-    width: 33.5%;
-  }
-`;
-
-const Banner = styled.div`
-  height: 100%;
-  width: 100%;
-`;
-
-const Header = styled.div`
-  height: 250px;
-
-  display: flex;
-  img {
-    display: inline-block;
-    height: 250px;
-    width: 250px;
+    width: 33%;
   }
 `;
 

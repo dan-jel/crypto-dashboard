@@ -1,8 +1,8 @@
 import { ResponsiveBar } from "@nivo/bar";
 
-const BarChart = ({ data /* see data tab */ }) => (
+const ATBarChart = ({ atBarData }) => (
   <ResponsiveBar
-    data={data}
+    data={atBarData}
     theme={{
       textColor: "#ffffff",
       fontSize: 11,
@@ -34,24 +34,25 @@ const BarChart = ({ data /* see data tab */ }) => (
     }}
     keys={["x"]}
     indexBy="y"
-    margin={{ top: 50, right: 100, bottom: 50, left: 60 }}
+    margin={{ top: 25, right: 110, bottom: 35, left: 60 }}
     layout="horizontal"
     valueScale={{ type: "linear" }}
     indexScale={{ type: "band", round: true }}
     valueFormat={{ format: "", enabled: false }}
-    colors={data.map((c) => c.color)}
+    colors={atBarData.map((c) => c.color)}
     colorBy="index"
+    padding={0.3}
     borderColor={{ theme: "background" }}
     axisTop={null}
     axisRight={null}
     axisBottom={{
+      tickValues: 5,
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 0,
-      legend: "price",
       legendPosition: "middle",
       legendOffset: 32,
     }}
+    gridXValues={5}
     axisLeft={{
       tickSize: 5,
       tickPadding: 5,
@@ -69,12 +70,12 @@ const BarChart = ({ data /* see data tab */ }) => (
     legends={[
       {
         dataFrom: "keys",
-        data: data
+        data: atBarData
           .slice(0)
           .reverse()
-          .map((d) => ({
-            color: d.color,
-            label: d.x,
+          .map((cbd) => ({
+            color: cbd.color,
+            label: cbd.x.toFixed(2) + " €",
           })),
         anchor: "bottom-right",
         direction: "column",
@@ -89,7 +90,7 @@ const BarChart = ({ data /* see data tab */ }) => (
         symbolSize: 25,
       },
     ]}
-    tooltip={({ y, data }) => (
+    tooltip={({ data }) => (
       <div
         style={{
           padding: 5,
@@ -104,4 +105,4 @@ const BarChart = ({ data /* see data tab */ }) => (
   />
 );
 
-export default BarChart;
+export default ATBarChart;
